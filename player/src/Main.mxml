@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-This is a test code to test the Flash RTMP server for NetConnection and NetStream.
--->
-
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" horizontalAlign="left">
-
     <mx:Label text="User interface to test NetConnection and NetStream API calls"/>
-
     <mx:HBox>
         <mx:Label text="NetConnection"/>
         <mx:TextInput id="urlText" text="rtmp://localhost/myapp" toolTip="URL to connect" enabled="{nc == null}"/>
         <mx:Button label="Connect" click="connect(urlText.text)" enabled="{nc == null}"/>
         <mx:Button label="Close" click="close()" enabled="{nc != null}"/>
     </mx:HBox>
-
     <mx:HBox>
         <mx:Label text="NetStream"/>
         <mx:TextInput id="streamText" text="user1" toolTip="Stream name to publish or play" enabled="{nc != null}"/>
@@ -23,13 +15,10 @@ This is a test code to test the Flash RTMP server for NetConnection and NetStrea
         <mx:Button label="Play" click="play(streamText.text)" enabled="{nc != null &amp;&amp; ns == null}"/>
         <mx:Button label="Close" click="closeStream()" enabled="{nc != null &amp;&amp; ns != null}"/>
     </mx:HBox>
-
     <mx:HBox id="videoBox">
         <mx:VideoDisplay id="local" creationComplete="localCreated()" width="160" height="120" />
     </mx:HBox>
-
     <mx:TextArea id="log" width="100%" height="100%"/>
-
     <mx:Script>
         <![CDATA[
         import mx.core.UIComponent;
@@ -85,7 +74,7 @@ This is a test code to test the Flash RTMP server for NetConnection and NetStrea
                 ns.addEventListener(IOErrorEvent.IO_ERROR, streamErrorHandler, false, 0, true);
                 ns.addEventListener(AsyncErrorEvent.ASYNC_ERROR, streamErrorHandler, false, 0, true);
                 ns.client = {};
-
+                ns.bufferTime = 10;
                 ns.play(name);
 
                 remoteVideo.attachNetStream(ns);
